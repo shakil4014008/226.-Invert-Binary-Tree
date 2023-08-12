@@ -1,45 +1,23 @@
 # 226.-Invert-Binary-Tree
 
 
-`````c#
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     public int val;
- *     public TreeNode left;
- *     public TreeNode right;
- *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-public class Solution {
-    public TreeNode InvertTree(TreeNode root) {
-        if(root == null) return root;
-        //BFS solution
+`````py
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+      # T = O(n), S = O(n) worst case, O(logn)
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root is None: return None 
+        root.left, root.right  = root.right, root.left 
+        self.invertTree(root.right)
+        self.invertTree(root.left)
+        return root
+
         
-        Queue<TreeNode> queue = new Queue<TreeNode>();
-        queue.Enqueue(root);
-        
-        while(queue.Count > 0){
-            var node = queue.Dequeue();
-            //inversion
-            TreeNode temp = node.left;
-            node.left = node.right;
-            node.right = temp;
-            
-            if(node.left != null){
-                queue.Enqueue(node.left);
-            }
-            if(node.right != null){
-                queue.Enqueue(node.right);
-            } 
-        }
-        
-                 
-        return root;
-    }
-}
+
+
 ``````
